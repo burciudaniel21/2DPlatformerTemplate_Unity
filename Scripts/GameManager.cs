@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int playerHealth = 100;
+    public Player player;
     public int playerScore = 0;
 
     // TMP text elements for health, score, and win message
@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateHealth(int amount)
     {
-        playerHealth += amount;
-        if (playerHealth <= 0)
+        player.health += amount;
+        if (player.health <= 0)
         {
             RestartGame();
         }
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = "Health: " + playerHealth.ToString();
+            healthText.text = "Health: " + player.health.ToString();
         }
     }
 
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         // Reset player health and score to their default values
-        playerHealth = 100;
+        player.health = 100;
         playerScore = 0;
 
         // Update UI after reset

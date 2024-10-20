@@ -36,7 +36,7 @@ public class Player : Character
     public override void TakeDamage(int damage)
     {
         GameManager.Instance.UpdateHealth(-damage); // Reduce health in the GameManager
-        Debug.Log("Player Health: " + GameManager.Instance.playerHealth);
+        Debug.Log("Player Health: " + GameManager.Instance.player.health);
     }
 
     protected override void Die()
