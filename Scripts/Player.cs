@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class Player : Character
 {
+    private IMove movement;
+
+    private void Start()
+    {
+       movement = GetComponent<IMove>();
+    }
+
     private void Update()
     {
-        float direction = Input.GetAxis("Horizontal");
-        Move(direction);
+        movement.Move();
 
         if (Input.GetButtonDown("Jump"))
         {
