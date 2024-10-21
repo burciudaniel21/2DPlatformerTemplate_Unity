@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : Character
 {
     private IMove movement;
+    public Weapon equippedWeapon; // Aggregation: Weapon can exist independently
 
     private void Start()
     {
@@ -17,6 +18,14 @@ public class Player : Character
         {
             Jump();
         }
+        if (Input.GetButtonDown("Fire1") && equippedWeapon != null)
+        {
+            UseWeapon();
+        }
+    }
+    public void UseWeapon()
+    {
+        equippedWeapon.UseWeapon(); // Aggregated weapon is used by the player
     }
 
     public void Jump()
@@ -31,6 +40,18 @@ public class Player : Character
         {
             CollectItem(item);
         }
+
+        Weapon newWeapon = other.GetComponent<Weapon>();
+        if (newWeapon != null)
+        {
+            EquipWeapon(newWeapon); // Equip the weapon when collected
+        }
+    }
+
+    public void EquipWeapon(Weapon newWeapon)
+    {
+        equippedWeapon = newWeapon;
+        Debug.Log("Player equipped a new weapon!");
     }
 
     public void CollectItem(IItem item)
